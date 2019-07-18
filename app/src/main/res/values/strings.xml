@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Kiwi Task</string>
+    <string name="title_flights">Flights</string>
+    <string name="header_title">Fly</string>
+</resources>

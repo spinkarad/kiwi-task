@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="imgUrl"
+            type="String" />
+
+        <variable
+            name="destination"
+            type="String" />
+
+        <variable
+            name="departureTimestamp"
+            type="Long" />
+
+        <variable
+            name="price"
+            type="String" />
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flight_item_height"
+        android:layout_marginStart="@dimen/regular_space"
+        android:layout_marginEnd="@dimen/regular_space"
+        android:layout_marginBottom="@dimen/regular_space"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{listener}"
+        app:cardCornerRadius="@dimen/regular_space"
+        app:cardElevation="@dimen/small_space"
+        app:rippleColor="@color/colorAccent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/destination_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_flight_placeholder"
+                app:corners="@{16}"
+                app:imageUrl="@{imgUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/date_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/regular_space"
+                android:layout_marginBottom="@dimen/small_space"
+                android:background="@drawable/image_text_bg"
+                android:paddingStart="@dimen/small_space"
+                app:timestamp="@{departureTimestamp}"
+                android:paddingEnd="@dimen/small_space"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/destination_img"
+                app:layout_constraintStart_toStartOf="@+id/destination_img"
+                tools:text="Dec 9 2019"
+                tools:textColor="@color/text" />
+
+            <FrameLayout
+                android:id="@+id/destination_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/date_txt"
+                app:layout_constraintEnd_toStartOf="@id/amount_txt"
+                app:layout_constraintStart_toStartOf="@+id/date_txt">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/large_space"
+                    android:background="@drawable/image_text_bg"
+                    android:paddingStart="@dimen/small_space"
+                    android:paddingEnd="@dimen/small_space"
+                    android:text="@{destination}"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry"
+                    tools:text="Zrce Beach, Croatia"
+                    tools:textColor="@color/text" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/amount_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/regular_space"
+                android:layout_marginStart="@dimen/regular_space"
+                android:layout_marginBottom="@dimen/small_space"
+                android:background="@drawable/image_text_bg"
+                android:paddingStart="@dimen/small_space"
+                android:paddingEnd="@dimen/small_space"
+                android:text="@{price}"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/destination_img"
+                app:layout_constraintEnd_toEndOf="@+id/destination_img"
+                tools:text="22 000 Kc"
+                tools:textColor="@color/text" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
