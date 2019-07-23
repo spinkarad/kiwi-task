@@ -12,14 +12,14 @@ import rsp.example.kiwitask.data.entities.LocationsResponse
 
 interface FlightsRemoteService {
 
-    @GET("flights?fly_from=CZ&partner=picky&limit=1&curr=CZK")
+    @GET("flights?fly_from=CZ&partner=picky&limit=1&curr=CZK&nights_in_dst_from=3&nights_in_dst_to=14")
     fun getFlight(
         @Query("fly_to") flyTo: String,
         @Query("date_from") dateFrom: String,
         @Query("date_to") dateTo: String
     ): Single<Flight>
 
-    @GET("locations?type=top_destinations&term=PRG&locale=en-US&location_types=airport&active_only=true&source_popularity=searches&fallback_popularity=bookings")
+    @GET("locations?type=top_destinations&term=PRG&locale=en-US&location_types=locationName&active_only=true&source_popularity=searches&fallback_popularity=bookings")
     fun getLocations(
         @Query("limit") limit: String = "50"
     ): Single<LocationsResponse>

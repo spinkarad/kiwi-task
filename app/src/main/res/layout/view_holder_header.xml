@@ -30,7 +30,7 @@
             android:textAllCaps="true"
             android:shadowRadius="1.8"
             android:text="@string/header_title"
-            android:textColor="@color/text"
+            android:textColor="@color/header_text"
             android:textSize="46sp"
             android:textStyle="bold" />
 

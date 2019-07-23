@@ -11,4 +11,10 @@
         <item name="android:windowFullscreen">false</item>
     </style>
 
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/super_light_blue</item>
+    </style>
+
 </resources>

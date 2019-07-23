@@ -6,14 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.mvrx.BaseMvRxFragment
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_base.*
+import retrofit2.HttpException
 import rsp.example.kiwitask.R
 import rsp.example.kiwitask.ui.MvRxEpoxyController
+import java.io.IOException
 
 
 abstract class MvRxFragment : BaseMvRxFragment() {
 
-    protected lateinit var recyclerView: EpoxyRecyclerView
+    private lateinit var recyclerView: EpoxyRecyclerView
     private val epoxyController by lazy { epoxyController() }
+    protected open val layoutId = R.layout.fragment_base
 
     abstract fun epoxyController(): MvRxEpoxyController
 
@@ -22,12 +27,15 @@ abstract class MvRxFragment : BaseMvRxFragment() {
         epoxyController.onRestoreInstanceState(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_base, container, false).apply {
-            recyclerView = findViewById<EpoxyRecyclerView>(R.id.recycler_view).apply {
-//                (itemAnimator as? androidx.recyclerview.widget.SimpleItemAnimator)?.supportsChangeAnimations = false
-                setController(epoxyController)
-            }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(layoutId, container, false).apply {
+                recyclerView = findViewById<EpoxyRecyclerView>(R.id.recycler_view).apply {
+                    setController(epoxyController)
+                }
         }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -44,13 +52,13 @@ abstract class MvRxFragment : BaseMvRxFragment() {
         recyclerView.requestModelBuild()
     }
 
-  /*  protected fun showError(error: Throwable) {
-        val unknown = resources.getString(R.string.unknown_error)
-        val message = if (error is HttpException) {
-            error.getErrorMessage() ?: unknown
-        } else {
-            unknown
+    protected fun shoeErrorSnack(error: Throwable) {
+       val mes= when(error) {
+            is IOException -> R.string.error_connection
+            else -> {
+                R.string.error_default
+            }
         }
-        Snackbar.make(fragment_container, message, 4000).apply { show() }
-    }*/
+        Snackbar.make(fragment_container, mes, 4000).apply { show() }
+    }
 }

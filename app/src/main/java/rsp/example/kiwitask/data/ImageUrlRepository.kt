@@ -12,7 +12,6 @@ class ImageUrlRepository(private val remoteService: UnsplashRemoteService) {
 
     fun getLocationImgUrl(location: String): Single<ImgUrl> {
         return remoteService.getLocationImage("$location city")
-            .doOnSuccess { println(it) }
             .composeSchedulers()
     }
 

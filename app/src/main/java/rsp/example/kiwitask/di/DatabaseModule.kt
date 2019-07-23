@@ -16,12 +16,10 @@ val databaseModule = module {
             .build()
     }
 
-    single {
-        get<FlightsDatabase>().locationsDao()
-    }
+    single { get<FlightsDatabase>().locationsDao() }
 
-    single {
-        get<FlightsDatabase>().flightsDao()
-    }
+    single { get<FlightsDatabase>().flightsDao() }
+
+    single { get<FlightsDatabase>().routeDao() }
 
 }

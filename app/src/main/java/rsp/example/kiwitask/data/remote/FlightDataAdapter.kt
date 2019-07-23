@@ -29,6 +29,7 @@ class FlightAdapter {
             endObject()
         }
         id = data.id
+        data.route.forEach { it.flightId = id }
         return Flight(id, data, currency)
     }
 
@@ -38,7 +39,6 @@ class FlightAdapter {
         val data = dataAdapter.fromJson(reader)
         reader.close()
         skipValue()
-        return data ?: throw JsonDataException("data must n")
+        return data ?: throw JsonDataException("data must not be null")
     }
-
 }

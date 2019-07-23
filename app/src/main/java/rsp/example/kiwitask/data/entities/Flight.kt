@@ -1,8 +1,6 @@
 package rsp.example.kiwitask.data.entities
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.squareup.moshi.Json
 
 /**
@@ -13,10 +11,21 @@ data class Flight(
     @PrimaryKey
     val id: String,
     @Embedded(prefix = "data_")
-    val `data`: Data,
+    val data: Data,
     val currency: String,
     var locationImgUrl: String? = null
-)
+) {
+
+    val locationName: String
+        get() = "${data.cityTo}, ${data.countryTo.name}"
+
+    val from: String
+        get() = "${data.cityFrom}, ${data.flyFrom}"
+
+    val to: String
+        get() = "${data.cityTo}, ${data.flyTo}"
+}
+
 
 data class Data(
     val id: String,
@@ -34,15 +43,48 @@ data class Data(
     val dTime: Long,
     val mapIdto: String,
     val dTimeUTC: Long,
-    val deep_link: String,
+    @field:Json(name = "deep_link")
+    val deepLink: String,
     val distance: Double,
     val flyFrom: String,
     val flyTo: String,
-    val fly_duration: String,
+    @field:Json(name = "fly_duration")
+    val flyDuration: String,
     val nightsInDest: Int?,
     val price: Int,
-    val return_duration: String?
-)
+    @field:Json(name = "return_duration")
+    val returnDuration: String?
+){
+    @Ignore
+    var route: List<Leg> = emptyList()
+}
+
+class FlightWithAllLegs {
+    @Embedded
+    var flight: Flight?=null
+
+    @Relation(parentColumn = "id", entityColumn = "flightId")
+    var route: List<Leg> = emptyList()
+
+    val returnTimestamp: Long
+    get()=route.first { it.isReturn==1 }.dTime
+
+    val returnFrom: String
+        get()=route.first { it.isReturn==1 }.let {
+          "${it.cityFrom}, ${it.flyFrom}"
+        }
+
+    val returnTo: String
+        get()=route.last { it.isReturn==1 }.let {
+            "${it.cityTo}, ${it.flyTo}"
+        }
+
+    val firstForwardId:String
+        get()=route.first().id
+
+    val firstBackId:String
+        get()=route.first{it.isReturn==1}.id
+}
 
 data class Conversion(
     val EUR: Int

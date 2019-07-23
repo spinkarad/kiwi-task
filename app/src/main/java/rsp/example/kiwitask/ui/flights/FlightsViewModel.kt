@@ -1,4 +1,4 @@
-package rsp.example.kiwitask.ui.base.flights
+package rsp.example.kiwitask.ui.flights
 
 import com.airbnb.mvrx.*
 import org.koin.android.ext.android.inject
@@ -21,12 +21,11 @@ class FlightsViewModel(initialState: FlightsState, repo: FlightsRepository) :
             val repo: FlightsRepository by viewModelContext.activity.inject()
             return FlightsViewModel(state, repo)
         }
-
     }
 
     init {
         repo.getFlights()
-            .doOnError { }
+            .doOnError {println(it) }
             .execute { copy(flights = it) }
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:drawablePadding="@dimen/large_space"
+            android:drawableTint="@color/transparent_grey"
+            android:drawableTop="@drawable/plane_error"
+            android:layout_marginTop="@dimen/large_space"
+            android:layout_height="wrap_content"
+            android:text="@string/error_default"
+            android:textSize="19sp"/>
+</layout>

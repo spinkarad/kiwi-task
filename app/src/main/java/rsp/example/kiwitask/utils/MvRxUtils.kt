@@ -15,3 +15,10 @@ fun <T> Async<T>?.handle(
         is Fail -> onFail(this)
     }
 }
+
+
+fun <T, S: MvRxState> S.onSuccess(asyncVal: Async<T>, stateReducer: S.(T) -> S): S {
+    return if (asyncVal is Success && asyncVal() != null) {
+        stateReducer(asyncVal())
+    } else this
+}

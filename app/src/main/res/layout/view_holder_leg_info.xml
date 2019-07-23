@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="from"
+            type="String" />
+
+        <variable
+            name="to"
+            type="String" />
+
+        <variable
+            name="isFirstForward"
+            type="Boolean" />
+
+        <variable
+            name="isFirstBack"
+            type="Boolean" />
+
+        <variable
+            name="departureTimestamp"
+            type="Long" />
+
+        <variable
+            name="arrivalTimestamp"
+            type="Long" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_space">
+
+        <ImageView
+            android:id="@+id/direction_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/light_blue"
+            app:back="@{isFirstBack}"
+            app:forward="@{isFirstForward}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_arrow_forward"
+            tools:visibility="gone" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <TextView
+            android:id="@+id/from_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{from}"
+            android:textColor="@color/basic_text_light"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/direction_img"
+            tools:text="Prague" />
+
+        <TextView
+            android:id="@+id/to_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{to}"
+            android:textColor="@color/basic_text_light"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/direction_img"
+            tools:text="London" />
+
+        <TextView
+            android:id="@+id/dep_time_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/from_txt"
+            app:layout_constraintStart_toStartOf="@id/from_txt"
+            app:layout_constraintTop_toBottomOf="@id/from_txt"
+            app:legTimestamp="@{departureTimestamp}"
+            tools:text="Dec 02 14:35" />
+
+        <TextView
+            android:id="@+id/arr_time_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/to_txt"
+            app:layout_constraintStart_toStartOf="@id/to_txt"
+            app:layout_constraintTop_toBottomOf="@id/to_txt"
+            app:legTimestamp="@{arrivalTimestamp}"
+            tools:text="Dec 02 14:55" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
