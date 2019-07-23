@@ -7,7 +7,7 @@ import com.squareup.moshi.Json
  * Created by Radek Špinka on 14.07.2019.
  */
 @Entity
-data class Flight(
+class Flight(
     @PrimaryKey
     val id: String,
     @Embedded(prefix = "data_")

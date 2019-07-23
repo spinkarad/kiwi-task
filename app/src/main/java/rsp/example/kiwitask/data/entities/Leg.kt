@@ -1,16 +1,24 @@
 package rsp.example.kiwitask.data.entities
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import com.squareup.moshi.Json
 
 /**
  * Created by Radek Špinka on 19.07.2019.
  */
 
-@Entity
+@Entity(
+    primaryKeys = ["id", "flightId"],
+    foreignKeys = [ForeignKey(
+        entity = Flight::class,
+        parentColumns = ["id"],
+        childColumns = ["flightId"],
+        onDelete = CASCADE
+    )]
+)
 data class Leg(
-    @PrimaryKey
     val id: String,
     var flightId: String,
     @field:Json(name = "return")
@@ -47,7 +55,7 @@ data class Leg(
     val refresh_timestamp: Int,
     val source: String,
     val vehicle_type: String
-){
+) {
 
     val from: String
         get() = "$cityFrom, $flyFrom"

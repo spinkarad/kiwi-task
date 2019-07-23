@@ -1,8 +1,8 @@
 ## Úkol nabídka zajímavých letů
 
 #### Zadání:
-- Vytvořte jednoduchou plikaci s nabídkou zajímavých letů
-- Nabídka je omezena na 5 letů a lety se neopakují ve dvou po sobě jdoucívh dnech
+- Vytvořte jednoduchou aplikaci s nabídkou zajímavých letů
+- Nabídka je omezena na 5 letů a lety se neopakují ve dvou po sobě jdoucíxh dnech
 - Použijte api [https://docs.kiwi.com/](https://docs.kiwi.com/) 
 
 #### Řešení:
